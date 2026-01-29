@@ -1,0 +1,12 @@
+# OpenRouter Dashboard 設定檔
+# 複製此檔案為 config.toml 並填入你的設定
+
+[openrouter]
+# 從 https://openrouter.ai/keys 取得
+api_key = "sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# 自訂顯示名稱（選填）
+name = "My API Key"
+
+[server]
+# 預設為 8000
+port = 8000

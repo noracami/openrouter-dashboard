@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# uv
+uv.lock
+
+# Config
+config.toml
+
+# IDE
+.idea/
+.vscode/

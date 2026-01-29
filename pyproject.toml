@@ -1,0 +1,13 @@
+[project]
+name = "openrouter-dashboard"
+version = "0.1.0"
+description = "OpenRouter API 使用量監控儀表板"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "requests",
+]
+
+[tool.uv]
+dev-dependencies = []

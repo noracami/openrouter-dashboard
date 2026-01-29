@@ -1,0 +1,8 @@
+docs/
+.git/
+.gitignore
+*.md
+__pycache__/
+*.pyc
+.env
+config.toml

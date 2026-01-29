@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenRouter Usage Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">OpenRouter 使用量監控</h1>
+        <p id="label" class="text-gray-500 mb-6">載入中...</p>
+
+        <div id="error" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 剩餘額度 -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <p class="text-gray-500 text-sm mb-1">剩餘額度</p>
+                <p id="remaining" class="text-3xl font-bold text-emerald-600">--</p>
+                <p class="text-gray-400 text-xs mt-1">USD</p>
+            </div>
+
+            <!-- 今日消耗 -->
+            <div class="bg-blue-600 rounded-lg shadow p-6">
+                <p class="text-blue-200 text-sm mb-1">今日消耗</p>
+                <p id="daily" class="text-3xl font-bold text-white">--</p>
+                <p class="text-blue-300 text-xs mt-1">USD</p>
+            </div>
+
+            <!-- 累積總消耗 -->
+            <div class="bg-gray-800 rounded-lg shadow p-6">
+                <p class="text-gray-400 text-sm mb-1">累積總消耗</p>
+                <p id="total" class="text-3xl font-bold text-white">--</p>
+                <p class="text-gray-500 text-xs mt-1">USD</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('/api/usage')
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then(data => {
+                document.getElementById('label').textContent = data.name || '未命名';
+                document.getElementById('remaining').textContent = data.limit_remaining?.toFixed(4) ?? 'N/A';
+                document.getElementById('daily').textContent = data.usage_daily?.toFixed(4) ?? 'N/A';
+                document.getElementById('total').textContent = data.usage?.toFixed(4) ?? 'N/A';
+            })
+            .catch(err => {
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = `無法取得資料：${err.message}`;
+                errorDiv.classList.remove('hidden');
+            });
+    </script>
+</body>
+</html>
