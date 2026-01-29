@@ -60,6 +60,9 @@ docker run -p 8080:8000 -v $(pwd)/config.toml:/code/config.toml openrouter-dashb
 
 # 自訂 port（環境變數覆蓋 config.toml）
 docker run -p 8080:3000 -e PORT=3000 -e OPENROUTER_API_KEY="sk-..." openrouter-dashboard
+
+# 使用 host 網路（port 自動從 config.toml 讀取）
+docker run --network host -v $(pwd)/config.toml:/code/config.toml openrouter-dashboard
 ```
 
 ## 設定優先順序
