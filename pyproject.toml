@@ -9,5 +9,5 @@ dependencies = [
     "requests",
 ]
 
-[tool.uv]
-dev-dependencies = []
+[dependency-groups]
+dev = []
