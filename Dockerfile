@@ -17,6 +17,8 @@ RUN uv sync --no-dev
 # 切換到非 root 使用者
 USER appuser
 
+ENV RELOAD=false
+
 EXPOSE 80
 
-CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uv", "run", "python", "-m", "app"]

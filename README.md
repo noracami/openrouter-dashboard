@@ -46,19 +46,21 @@ uv run python -m app
 ## Docker
 
 ```bash
-# 建立映像檔
 docker build -t openrouter-dashboard .
-
-# 執行（二擇一）
-
-# 方式一：環境變數
-docker run -p 8080:80 -e OPENROUTER_API_KEY="sk-..." openrouter-dashboard
-
-# 方式二：掛載設定檔
-docker run -p 8080:80 -v $(pwd)/config.toml:/code/config.toml openrouter-dashboard
 ```
 
-開啟 http://localhost:8080
+**使用案例：**
+
+```bash
+# 預設 port 8000
+docker run -p 8080:8000 -e OPENROUTER_API_KEY="sk-..." openrouter-dashboard
+
+# 掛載 config.toml（port 從設定檔讀取）
+docker run -p 8080:8000 -v $(pwd)/config.toml:/code/config.toml openrouter-dashboard
+
+# 自訂 port（環境變數覆蓋 config.toml）
+docker run -p 8080:3000 -e PORT=3000 -e OPENROUTER_API_KEY="sk-..." openrouter-dashboard
+```
 
 ## 設定優先順序
 
@@ -66,4 +68,4 @@ docker run -p 8080:80 -v $(pwd)/config.toml:/code/config.toml openrouter-dashboa
 |--------|----------|
 | API Key | `OPENROUTER_API_KEY` > `config.toml` |
 | Name | `OPENROUTER_NAME` > `config.toml` > API 回傳值 |
-| Port | `PORT` > `config.toml` > 預設 8000 |
+| Port | `PORT` > `config.toml` > 8000 |
